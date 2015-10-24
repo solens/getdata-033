@@ -17,15 +17,28 @@ usable_index<-grepl("mean()",features[,2],fixed=TRUE)
 usable_index2<-grepl("std()",features[,2],fixed=TRUE)
 use_index<-as.logical(usable_index+usable_index2)
 
-x<-rbind(x_test[use_index],x_train[use_index])
-y<-rbind(y_test,y_train)
-feat<-features[use_index,2]
+values<-rbind(x_test[,use_index],x_train[,use_index])
+activity<-rbind(y_test,y_train)
+subject<-rbind(subject_test,subject_train)
+feat<-as.character(features[use_index,2])
 
-y<-mapvalues(t(y),from=t(activity_labels[1]),to=t(activity_labels[2]))
-data<-x
-names(data)<-feat
-data<-cbind(y,data)
-split_data<-split(data,data[1])
+full_act_label<-mapvalues(simplify2array(activity),from=activity_labels[,1],to=activity_labels[,2])
+
+tidy_data<-cbind(subject,full_act_label,values)
+
+names(tidy_data)<-c("subject","activity",feat)
+
+##melt features data into long dataframe, then separate the feature components to get cols:
+##subject / activity / motion / statElement / direction / value
+## long_data is the tidy data required for further analysis
+melt_data<-melt(tidy_data,names(tidy_data[1:2]),names(tidy_data[-c(1,2)])) 
+averages<-with(melt_data,tapply(value,list(subject,activity,variable),mean))
+melt_average<-melt(averages)
+long_data<-separate(melt_data,variable,c("motion","statElement","direction"))
+
+
+
+
 
 
 
