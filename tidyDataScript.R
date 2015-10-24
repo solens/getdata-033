@@ -32,8 +32,10 @@ names(tidy_data)<-c("subject","activity",feat)
 ##subject / activity / motion / statElement / direction / value
 ## long_data is the tidy data required for further analysis
 melt_data<-melt(tidy_data,names(tidy_data[1:2]),names(tidy_data[-c(1,2)])) 
+write.table(melt_data,file="melt_data.txt")
 averages<-with(melt_data,tapply(value,list(subject,activity,variable),mean))
 melt_average<-melt(averages)
+write.table(melt_average,file="melt_average.txt")
 long_data<-separate(melt_data,variable,c("motion","statElement","direction"))
 
 
