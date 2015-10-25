@@ -40,6 +40,8 @@ full_act_label: character vector of all relevant features as in use_index, corre
 
 melt_data: tidy data set of all relevant features as a variable with subject and activity. This table i written to melt_data.txt
 
+long_data: long version of melt_data with the 3 components of features as different variables (motion/statElement/direction)
+
 averages: 3D matrix of the average of a feature per activity and per subject
 
 melt_average: 2D data frame of the average of a feature per activity and per subject (feature as another variable). This table gets written to melt_average.txt
