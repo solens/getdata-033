@@ -43,6 +43,8 @@ melt_average<-melt(averages)
 write.table(melt_average,file="melt_average.txt")
 long_data<-separate(melt_data,variable,c("motion","statElement","direction"))
 
+melt_average
+
 
 
 
