@@ -1,5 +1,7 @@
 #load necessary packages
 library(dplyr)
+library(plyr)
+library(tidyr)
 
 #Get all relevant data from directory
 dir<-getwd()
@@ -33,7 +35,7 @@ names(tidy_data)<-c("subject","activity",feat)
 
 ##melt features data into long dataframe, then separate the feature components to get cols:
 ##subject / activity / motion / statElement / direction / value
-## long_data is the tidy data required for further analysis
+
 melt_data<-melt(tidy_data,names(tidy_data[1:2]),names(tidy_data[-c(1,2)])) 
 write.table(melt_data,file="melt_data.txt")
 averages<-with(melt_data,tapply(value,list(subject,activity,variable),mean))

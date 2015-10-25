@@ -25,6 +25,7 @@ As labels in UCI HAR Dataset:
 these are all used as variables as is, without the extension
 
 ## Available datasets from the tidying process
+### Run run_analysis.R
 
 usable_index, usable index2 (combined to use_index): features containing a measuring on respectively the mean and the standard deviation
 
@@ -42,3 +43,6 @@ melt_data: tidy data set of all relevant features as a variable with subject and
 averages: 3D matrix of the average of a feature per activity and per subject
 
 melt_average: 2D data frame of the average of a feature per activity and per subject (feature as another variable). This table gets written to melt_average.txt
+
+## Required packages
+dply, plyr, tidyr
